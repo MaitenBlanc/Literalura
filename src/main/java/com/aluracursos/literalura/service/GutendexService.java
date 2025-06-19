@@ -1,12 +1,12 @@
 package com.aluracursos.literalura.service;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.time.Year;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -91,4 +91,42 @@ public class GutendexService {
                 .filter(b -> langs.contains(b.getLanguage()))
                 .collect(Collectors.groupingBy(Libro::getLanguage, Collectors.counting()));
     }
+
+    public List<Libro> obtenerTop10LibrosMasDescargados() {
+        return bookRepo.findTop10ByOrderByDownloadsDesc();
+    }
+
+    public Author buscarAutorPorNombre(String nombre) {
+        return authorRepo.findByNameContainingIgnoreCase(nombre).orElse(null);
+    }
+
+    public List<Author> listarAutoresNacidosAntesDe(int year) {
+        return authorRepo.findByBirthYearLessThan(year);
+    }
+
+    public List<Author> listarAutoresFallecidosDespuesDe(int year) {
+        return authorRepo.findByDeathYearGreaterThan(year);
+    }
+
+    public void mostrarEstadisticasEdadAutores() {
+        int currentYear = Year.now().getValue();
+
+        var stats = authorRepo.findAll().stream()
+                .filter(a -> a.getBirthYear() != null)
+                .map(a -> {
+                    if (a.getDeathYear() != null) {
+                        return a.getDeathYear() - a.getBirthYear();
+                    } else {
+                        return currentYear - a.getBirthYear();
+                    }
+                })
+                .mapToInt(Integer::intValue)
+                .summaryStatistics();
+
+        System.out.println("Autores registrados: " + stats.getCount());
+        System.out.println("Edad promedio: " + String.format("%.1f", stats.getAverage()));
+        System.out.println("Edad mínima: " + stats.getMin());
+        System.out.println("Edad máxima: " + stats.getMax());
+    }
+
 }

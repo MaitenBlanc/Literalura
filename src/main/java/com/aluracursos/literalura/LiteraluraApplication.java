@@ -58,6 +58,36 @@ public class LiteraluraApplication implements CommandLineRunner {
 						Map<String, Long> stats = service.estadisticasIdioma(Arrays.asList(l1, l2));
 						stats.forEach((lang, count) -> System.out.println(lang + " -> " + count));
 						break;
+					case 7:
+						service.obtenerTop10LibrosMasDescargados()
+								.forEach(System.out::println);
+						break;
+					case 8:
+						System.out.print("Nombre autor: ");
+						String nombreAutor = sc.nextLine();
+						var autor = service.buscarAutorPorNombre(nombreAutor);
+						if (autor != null)
+							System.out.println(autor);
+						else
+							System.out.println("Autor no encontrado");
+						break;
+					case 9:
+						System.out.print("Año límite: ");
+						int anioNacimiento = sc.nextInt();
+						sc.nextLine();
+						service.listarAutoresNacidosAntesDe(anioNacimiento)
+								.forEach(System.out::println);
+						break;
+					case 10:
+						System.out.print("Año límite: ");
+						int anioFallecimiento = sc.nextInt();
+						sc.nextLine();
+						service.listarAutoresFallecidosDespuesDe(anioFallecimiento)
+								.forEach(System.out::println);
+						break;
+					case 11:
+						service.mostrarEstadisticasEdadAutores();
+						break;
 					case 0:
 						System.out.println("Saliendo...");
 						sc.close();
@@ -79,6 +109,11 @@ public class LiteraluraApplication implements CommandLineRunner {
 		System.out.println("4) Listar autores");
 		System.out.println("5) Listar autores vivos en año");
 		System.out.println("6) Estadísticas de idioma");
+		System.out.println("7) Top 10 libros más descargados");
+		System.out.println("8) Buscar autor por nombre");
+		System.out.println("9) Listar autores nacidos antes de un año");
+		System.out.println("10) Listar autores fallecidos después de un año");
+		System.out.println("11) Mostrar estadísticas edad autores");
 		System.out.println("0) Salir");
 		System.out.print("Opción: ");
 	}

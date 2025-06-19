@@ -12,6 +12,14 @@ Aplicación de consola en Java que permite buscar, registrar y consultar libros 
     - Mostrar el top 10 de libros más descargados.
     - Ver estadísticas generales (total de libros, autores, idiomas, etc.).
 
+## 🚀 Nuevas (Desafío extra)
+
+    - Top 10 libros más descargados desde la BD.
+    - Buscar autor por nombre (insensible a mayúsculas).
+    - Listar autores nacidos antes de un año dado.
+    - Listar autores fallecidos después de un año dado.
+    - Estadísticas con DoubleSummaryStatistics, p. ej. edad promedio, mínima y máxima de autores.
+
 ## ⚙️ Tecnologías usadas
 
     - Java 11+
@@ -54,21 +62,28 @@ Aplicación de consola en Java que permite buscar, registrar y consultar libros 
     Al iniciar, verás un menú similar a este:
         Bienvenido/a a Literalura
         Elige una opción:
-        1 – Buscar libro por título
-        2 – Listar libros registrados
-        3 – Listar autores registrados
-        4 – Listar autores vivos en un año específico
-        5 – Listar libros por idioma
-        6 – Top 10 libros más descargados
-        7 – Estadísticas generales
+        1 - Buscar y guardar libro
+        2 - Listar todos los libros
+        3 - Listar libros por idioma
+        4 - Listar autores
+        5 - Listar autores vivos en año
+        6 - Estadísticas de idioma
+        7 - Top 10 libros más descargados
+        8 - Buscar autor por nombre
+        9 - Listar autores nacidos antes de un año
+        10 - Listar autores fallecidos después de un año
+        11 - Mostrar estadísticas edad autores
         0 – Salir
-    Simplemente introduce el número y sigue las indicaciones.
+
+Simplemente introduce el número y sigue las indicaciones.
 
 ## 💡 Ejemplos de uso
 
-    - Buscar y guardar un libro: selecciona opción 1 y escribe el título o parte de él.
-    - Listar autores vivos en 1900: opción 4 → ingresa "1900".
-    - Ver top 10: opción 6 despliega los libros con mayor cantidad de descargas.
+    - Buscar libro: ingresá un título y se guarda el primer resultado.
+    - Top 10: opción 7 → muestra los diez libros con más descargas.
+    - Buscar autor: opción 8 → podés buscar por nombre exacto (insensible a mayúsculas).
+    - Filtrar autores: opciones 9 y 10 → listan según año de nacimiento/fallecimiento.
+    - Estadísticas de edad: opción 11 → muestra edad promedio, mínima y máxima entre los autores con año de nacimiento.
 
 ## 🧬 Arquitectura y estructura
 

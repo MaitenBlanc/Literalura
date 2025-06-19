@@ -10,4 +10,7 @@ public interface LibroRepository extends JpaRepository<Libro, Long> {
     List<Libro> findByLanguage(String language);
 
     List<Libro> findByLanguageIn(List<String> languages);
+
+    List<Libro> findTop10ByOrderByDownloadsDesc();
+
 }
